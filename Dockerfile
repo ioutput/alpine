@@ -25,7 +25,8 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories 
     && sed -i 's/cgroup_add_service /# cgroup_add_service /g' /lib/rc/sh/openrc-run.sh \
     && echo 'nohup service apache2 start &' > /etc/local.d/a.start \
     && chmod +x /etc/local.d/a.start \
-    && rc-update add local
+    && rc-update add local \
+    && sed -i '/expose_php/s/^;//;/expose_php/s/On/Off/' /etc/php7/php.ini
     #&& sed -i '/mod_rewrite.so/s/^#//'  /etc/apache2/httpd.conf
 
 
